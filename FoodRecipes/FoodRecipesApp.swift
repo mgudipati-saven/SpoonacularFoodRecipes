@@ -13,7 +13,7 @@ struct FoodRecipesApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+          ContentView(recipeSearch: ComplexRecipeSearch(query: "pasta"))
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
