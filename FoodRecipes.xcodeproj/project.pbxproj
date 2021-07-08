@@ -18,7 +18,7 @@
 		131249C8268EF2C900BDB869 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131249C7268EF2C900BDB869 /* ItemListView.swift */; };
 		131249CA268F319800BDB869 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131249C9268F319700BDB869 /* Recipe.swift */; };
 		131249CD268F321F00BDB869 /* APIResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 131249CC268F321F00BDB869 /* APIResources.swift */; };
-		13FEE7D7269083F4007CAB08 /* Recipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE7D6269083F4007CAB08 /* Recipes.swift */; };
+		13FEE7D7269083F4007CAB08 /* SpoonacularRecipeFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE7D6269083F4007CAB08 /* SpoonacularRecipeFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +56,7 @@
 		131249C7268EF2C900BDB869 /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
 		131249C9268F319700BDB869 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		131249CC268F321F00BDB869 /* APIResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResources.swift; sourceTree = "<group>"; };
-		13FEE7D6269083F4007CAB08 /* Recipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipes.swift; sourceTree = "<group>"; };
+		13FEE7D6269083F4007CAB08 /* SpoonacularRecipeFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoonacularRecipeFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,7 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				131249C9268F319700BDB869 /* Recipe.swift */,
-				13FEE7D6269083F4007CAB08 /* Recipes.swift */,
+				13FEE7D6269083F4007CAB08 /* SpoonacularRecipeFetcher.swift */,
 				131249CC268F321F00BDB869 /* APIResources.swift */,
 			);
 			path = Model;
@@ -288,7 +288,7 @@
 				131249A1268EE7AD00BDB869 /* Persistence.swift in Sources */,
 				131249CD268F321F00BDB869 /* APIResources.swift in Sources */,
 				1312499A268EE7AB00BDB869 /* ContentView.swift in Sources */,
-				13FEE7D7269083F4007CAB08 /* Recipes.swift in Sources */,
+				13FEE7D7269083F4007CAB08 /* SpoonacularRecipeFetcher.swift in Sources */,
 				13124998268EE7AB00BDB869 /* FoodRecipesApp.swift in Sources */,
 				131249CA268F319800BDB869 /* Recipe.swift in Sources */,
 				131249C8268EF2C900BDB869 /* ItemListView.swift in Sources */,

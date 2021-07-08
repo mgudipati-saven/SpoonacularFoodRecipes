@@ -19,10 +19,6 @@ struct APIResources {
     return urlComponents
   }
 
-  static func url(with endpoint: EndPoint) -> URL? {
-    urlComponents.url?.appendingPathComponent(endpoint.rawValue)
-  }
-
   static func url(with parameters: [String:String]) -> URL? {
     var components = URLComponents()
     components.scheme = "https"
