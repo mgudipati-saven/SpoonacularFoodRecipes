@@ -11,7 +11,7 @@ import Combine
 class SpoonacularRecipeFetcher: ObservableObject {
   @Published var results = [Recipe]()
 
-  var recipeSearch: ComplexRecipeSearch {
+  var recipeSearch: ComplexSearch {
     didSet { fetch() }
   }
 
@@ -19,7 +19,7 @@ class SpoonacularRecipeFetcher: ObservableObject {
 
   var fetchRecipeImage = PassthroughSubject<Recipe, Never>()
 
-  init(recipeSearch: ComplexRecipeSearch) {
+  init(recipeSearch: ComplexSearch) {
     self.recipeSearch = recipeSearch
     fetch()
   }

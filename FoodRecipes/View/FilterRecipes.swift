@@ -10,11 +10,11 @@ import SwiftUI
 struct FilterRecipes: View {
   @Environment(\.presentationMode) var presentationMode
 
-  @Binding var recipeSearch: ComplexRecipeSearch
+  @Binding var recipeSearch: ComplexSearch
 
-  @State private var draft: ComplexRecipeSearch
+  @State private var draft: ComplexSearch
 
-  init(recipeSearch: Binding<ComplexRecipeSearch>) {
+  init(recipeSearch: Binding<ComplexSearch>) {
     _recipeSearch = recipeSearch
     _draft = State(wrappedValue: recipeSearch.wrappedValue)
   }
@@ -23,10 +23,20 @@ struct FilterRecipes: View {
     NavigationView {
       Form {
         TextField("Search Text", text: $draft.query)
-        Picker("Cuisine", selection: $draft.cuisine) {
-          Text("Any").tag(Cuisine?.none)
-          ForEach(Cuisine.allCases) { (cuisine: Cuisine?) in
-            Text(cuisine?.rawValue ?? "Any").tag(cuisine)
+
+        Section {
+          Picker("Cuisine", selection: $draft.cuisine) {
+            Text("Any").tag(Cuisine?.none)
+            ForEach(Cuisine.allCases) { (cuisine: Cuisine?) in
+              Text(cuisine?.rawValue ?? "Any").tag(cuisine)
+            }
+          }
+
+          Picker("Diet", selection: $draft.diet) {
+            Text("Any").tag(Diet?.none)
+            ForEach(Diet.allCases) { (diet: Diet?) in
+              Text(diet?.rawValue ?? "Any").tag(diet)
+            }
           }
         }
       }
@@ -58,6 +68,6 @@ struct FilterRecipes: View {
 
 struct FilterRecipes_Previews: PreviewProvider {
   static var previews: some View {
-    FilterRecipes(recipeSearch: .constant(ComplexRecipeSearch(query: "pasta")))
+    FilterRecipes(recipeSearch: .constant(ComplexSearch(query: "pasta")))
   }
 }

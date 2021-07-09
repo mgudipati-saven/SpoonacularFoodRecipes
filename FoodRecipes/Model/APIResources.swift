@@ -12,13 +12,6 @@ struct APIResources {
     case recipes
   }
 
-  static var urlComponents: URLComponents {
-    var urlComponents = URLComponents()
-    urlComponents.scheme = "https"
-    urlComponents.host = "api.spoonacular.com"
-    return urlComponents
-  }
-
   static func url(with parameters: [String:String]) -> URL? {
     var components = URLComponents()
     components.scheme = "https"
@@ -33,36 +26,53 @@ struct APIResources {
   }
 }
 
-extension URLComponents {
-  mutating func setQueryItems(with parameters: [String:String]) {
-    self.queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
-  }
-}
-
 struct ComplexSearchResponse: Codable {
   let results: [Recipe]
 }
 
-struct ComplexRecipeSearch {
+struct ComplexSearch {
   var query: String
   var cuisine: Cuisine?
+  var diet: Diet?
 
   var parameters: [String:String] {
     var params = [String:String]()
     params["query"] = query
     params["addRecipeNutrition"] = "true"
     params["cuisine"] = cuisine?.rawValue
-
+    params["diet"] = diet?.rawValue
+    
     return params
   }
 }
 
 enum Cuisine: String, CaseIterable, Identifiable {
-  case African, American, British, Cajun, Caribbean, Chinese, EasternEuropean
-  case European, French, German, Greek, Indian, Irish, Italian, Japanese
-  case Jewish, Korean, LatinAmerican, Mediterranean, Mexican, MiddleEastern
-  case Nordic, Southern, Spanish, Thai, Vietnamese
+  case African, American,
+       British,
+       Cajun, Caribbean, Chinese,
+       European,
+       French,
+       German, Greek,
+       Indian, Irish, Italian,
+       Japanese, Jewish,
+       Korean,
+       Mediterranean, Mexican,
+       Nordic,
+       Southern, Spanish,
+       Thai,
+       Vietnamese
+  case LatinAmerican = "Latin American"
+  case MiddleEastern = "Middle Eastern"
+  case EasternEuropean = "Eastern European"
 
   var id: String { self.rawValue }
 }
 
+enum Diet: String, CaseIterable, Identifiable {
+  case Ketogenic, Vegetarian, Vegan, Pescetarian, Paleo, Primal, Whole30
+  case GlutenFree = "Gluten Free"
+  case LactoVegetarian = "Lacto-Vegetarian"
+  case OvoVegetarian = "Ovo-Vegetarian"
+
+  var id: String { self.rawValue }
+}
