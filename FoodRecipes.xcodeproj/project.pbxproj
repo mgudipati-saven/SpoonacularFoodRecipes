@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		130CE7F126987020005197CA /* RecipeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130CE7F026987020005197CA /* RecipeRow.swift */; };
 		13124998268EE7AB00BDB869 /* FoodRecipesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13124997268EE7AB00BDB869 /* FoodRecipesApp.swift */; };
 		1312499A268EE7AB00BDB869 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13124999268EE7AB00BDB869 /* ContentView.swift */; };
 		1312499C268EE7AD00BDB869 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1312499B268EE7AD00BDB869 /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		130CE7F026987020005197CA /* RecipeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRow.swift; sourceTree = "<group>"; };
 		13124994268EE7AB00BDB869 /* FoodRecipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodRecipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13124997268EE7AB00BDB869 /* FoodRecipesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodRecipesApp.swift; sourceTree = "<group>"; };
 		13124999268EE7AB00BDB869 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				1369B12F26981A5D00729549 /* RecipeCard.swift */,
+				130CE7F026987020005197CA /* RecipeRow.swift */,
 				131249C7268EF2C900BDB869 /* ItemListView.swift */,
 				1369B12D269819D300729549 /* FilterRecipes.swift */,
 			);
@@ -310,6 +313,7 @@
 				1369B12E269819D300729549 /* FilterRecipes.swift in Sources */,
 				1369B13026981A5D00729549 /* RecipeCard.swift in Sources */,
 				131249A1268EE7AD00BDB869 /* Persistence.swift in Sources */,
+				130CE7F126987020005197CA /* RecipeRow.swift in Sources */,
 				131249CD268F321F00BDB869 /* APIResources.swift in Sources */,
 				1312499A268EE7AB00BDB869 /* ContentView.swift in Sources */,
 				13FEE7D7269083F4007CAB08 /* SpoonacularRecipeFetcher.swift in Sources */,

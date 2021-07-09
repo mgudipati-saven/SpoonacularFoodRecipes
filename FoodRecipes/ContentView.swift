@@ -40,7 +40,7 @@ struct RecipeList: View {
   var body: some View {
     List {
       ForEach(recipeFetcher.results) { recipe in
-        RecipeCard(recipe: recipe)
+        RecipeRow(recipe: recipe)
       }
     }
     .listStyle(PlainListStyle())
