@@ -8,18 +8,6 @@
 import SwiftUI
 import Combine
 
-struct ComplexRecipeSearch {
-  let query: String
-
-  var parameters: [String:String] {
-    var params = [String:String]()
-    params["query"] = query
-    params["addRecipeNutrition"] = "true"
-    
-    return params
-  }
-}
-
 class SpoonacularRecipeFetcher: ObservableObject {
   @Published var results = [Recipe]()
 
@@ -42,6 +30,7 @@ class SpoonacularRecipeFetcher: ObservableObject {
     }
 
     if let url = APIResources.url(with: recipeSearch.parameters) {
+      print(url)
       URLSession.shared.dataTaskPublisher(for: url)
         .map(\.data)
         .decode(type: ComplexSearchResponse.self, decoder: JSONDecoder())

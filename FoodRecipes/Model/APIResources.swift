@@ -38,3 +38,31 @@ extension URLComponents {
     self.queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
   }
 }
+
+struct ComplexSearchResponse: Codable {
+  let results: [Recipe]
+}
+
+struct ComplexRecipeSearch {
+  var query: String
+  var cuisine: Cuisine?
+
+  var parameters: [String:String] {
+    var params = [String:String]()
+    params["query"] = query
+    params["addRecipeNutrition"] = "true"
+    params["cuisine"] = cuisine?.rawValue
+
+    return params
+  }
+}
+
+enum Cuisine: String, CaseIterable, Identifiable {
+  case African, American, British, Cajun, Caribbean, Chinese, EasternEuropean
+  case European, French, German, Greek, Indian, Irish, Italian, Japanese
+  case Jewish, Korean, LatinAmerican, Mediterranean, Mexican, MiddleEastern
+  case Nordic, Southern, Spanish, Thai, Vietnamese
+
+  var id: String { self.rawValue }
+}
+
