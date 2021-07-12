@@ -22,6 +22,7 @@
 		1369B12E269819D300729549 /* FilterRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1369B12D269819D300729549 /* FilterRecipes.swift */; };
 		1369B13026981A5D00729549 /* RecipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1369B12F26981A5D00729549 /* RecipeCard.swift */; };
 		13CDA164269BF74400803DEC /* RecipeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CDA163269BF74400803DEC /* RecipeDetail.swift */; };
+		13CDA166269C571900803DEC /* RecipeGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CDA165269C571900803DEC /* RecipeGrid.swift */; };
 		13FEE7D7269083F4007CAB08 /* SpoonacularRecipeFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FEE7D6269083F4007CAB08 /* SpoonacularRecipeFetcher.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		1369B12D269819D300729549 /* FilterRecipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRecipes.swift; sourceTree = "<group>"; };
 		1369B12F26981A5D00729549 /* RecipeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCard.swift; sourceTree = "<group>"; };
 		13CDA163269BF74400803DEC /* RecipeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetail.swift; sourceTree = "<group>"; };
+		13CDA165269C571900803DEC /* RecipeGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeGrid.swift; sourceTree = "<group>"; };
 		13FEE7D6269083F4007CAB08 /* SpoonacularRecipeFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoonacularRecipeFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,6 +171,7 @@
 			children = (
 				1369B12F26981A5D00729549 /* RecipeCard.swift */,
 				13CDA163269BF74400803DEC /* RecipeDetail.swift */,
+				13CDA165269C571900803DEC /* RecipeGrid.swift */,
 				130CE7F026987020005197CA /* RecipeRow.swift */,
 				131249C7268EF2C900BDB869 /* ItemListView.swift */,
 				1369B12D269819D300729549 /* FilterRecipes.swift */,
@@ -315,6 +318,7 @@
 			files = (
 				1369B12E269819D300729549 /* FilterRecipes.swift in Sources */,
 				13CDA164269BF74400803DEC /* RecipeDetail.swift in Sources */,
+				13CDA166269C571900803DEC /* RecipeGrid.swift in Sources */,
 				1369B13026981A5D00729549 /* RecipeCard.swift in Sources */,
 				131249A1268EE7AD00BDB869 /* Persistence.swift in Sources */,
 				130CE7F126987020005197CA /* RecipeRow.swift in Sources */,
