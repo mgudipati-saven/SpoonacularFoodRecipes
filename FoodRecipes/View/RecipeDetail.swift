@@ -36,18 +36,20 @@ struct RecipeDetail: View {
     //        Button(action: {
     //          presentationMode.wrappedValue.dismiss()
     //        }, label: {
-    //          Image(systemName:"chevron.left.circle.fill")
-    //            .font(.system(size: 50))
-    //            .foregroundColor(.black)
+    //          Image(systemName:"chevron.left")
+    //            .font(.system(size: 25))
+    //            .foregroundColor(.white)
+    //            .padding(10)
     //            .background(Color.yellow)
+    //            .clipShape(Circle())
     //        })
     //      }
     //    }
-    .edgesIgnoringSafeArea(.top)
+    .edgesIgnoringSafeArea(.all)
   }
 
   var recipeImage: some View {
-    Image("pasta")
+    Image(uiImage: recipe.image!)
       .resizable()
       .scaledToFill()
       .frame(minWidth: 0, maxWidth: .infinity)
@@ -57,17 +59,19 @@ struct RecipeDetail: View {
 
   var detailsCard: some View {
     VStack(spacing: 10) {
-      Text("Pasta").font(.system(.title3, design: .rounded)).bold()
+      Text("\(recipe.title)")
+        .font(.system(.title3, design: .rounded))
+        .bold()
+
       HStack(spacing: 2) {
-        Image(systemName: "star.fill").foregroundColor(.yellow)
-        Image(systemName: "star.fill").foregroundColor(.yellow)
-        Image(systemName: "star.fill").foregroundColor(.yellow)
-        Image(systemName: "star.fill").foregroundColor(.yellow)
-        Image(systemName: "star.fill").foregroundColor(.yellow)
+        ForEach(0..<recipe.aggregateLikes) { _ in
+          Image(systemName: "star.fill").foregroundColor(.yellow)
+        }
       }
+
       HStack {
-        ImageTag(image: "clock", tag1: "35", tag2: "mins")
-        ImageTag(image: "person.2.fill", tag1: "3", tag2: "servings")
+        ImageTag(image: "clock", tag1: "\(recipe.readyInMinutes)", tag2: "mins")
+        ImageTag(image: "person.2.fill", tag1: "\(recipe.servings)", tag2: "servings")
         ImageTag(image: "flame", tag1: "350", tag2: "Cal")
         ImageTag(image: "square.stack.3d.up.fill", tag1: "", tag2: "Easy")
       }
