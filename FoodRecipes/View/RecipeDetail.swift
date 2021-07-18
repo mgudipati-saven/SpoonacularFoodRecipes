@@ -8,57 +8,93 @@
 import SwiftUI
 
 struct RecipeDetail: View {
+  @Environment(\.presentationMode) var presentationMode
+
   var body: some View {
     ScrollView {
       VStack {
-        Image("pasta")
-          .resizable()
-          .scaledToFill()
-          .frame(minWidth: 0, maxWidth: .infinity)
-          .frame(height: 350)
-          .clipped()
-
-        VStack(spacing: 10) {
-          Text("Pasta").font(.system(.title3, design: .rounded)).bold()
-          HStack(spacing: 2) {
-            Image(systemName: "star.fill").foregroundColor(.yellow)
-            Image(systemName: "star.fill").foregroundColor(.yellow)
-            Image(systemName: "star.fill").foregroundColor(.yellow)
-            Image(systemName: "star.fill").foregroundColor(.yellow)
-            Image(systemName: "star.fill").foregroundColor(.yellow)
-          }
-          HStack {
-            ImageTag(image: "clock", tag1: "35", tag2: "mins")
-            ImageTag(image: "person.2.fill", tag1: "3", tag2: "servings")
-            ImageTag(image: "flame", tag1: "350", tag2: "Cal")
-            ImageTag(image: "square.stack.3d.up.fill", tag1: "", tag2: "Easy")
-          }
-        }
-        .padding()
-        .background(Color.white.opacity(0.95))
-        .cornerRadius(15)
-        .shadow(radius: 2)
-        .offset(y: -70)
-        .padding(.bottom, -70)
-
-        VStack(alignment: .leading) {
-          Text("Ingredients")
-            .font(.system(.title3, design: .rounded))
-            .bold()
-
-          ScrollView(.horizontal) {
-            HStack(spacing: 10) {
-              IngredientCard(name: "White Bread", image: "white-bread", amount: "2 slices")
-              IngredientCard(name: "Whole Chicken", image: "whole-chicken", amount: "1 pound")
-              IngredientCard(name: "Pineapple", image: "pineapple", amount: "2 pounds")
-            }
-            .frame(height: 162)
-          }
-        }
-        .padding()
+        recipeImage
+        detailsCard
+        ingredients
       }
     }
+    .navigationBarBackButtonHidden(true)
+    .navigationBarItems(leading: Button(action : {
+                self.presentationMode.wrappedValue.dismiss()
+            }){
+//    Text("\(Image(systemName: "chevron.left.circle.fill"))")
+      Image(systemName:"chevron.left")
+        .font(.system(size: 35))
+      .foregroundColor(.white)
+        .padding(10)
+      .background(Color.yellow)
+      .clipShape(Circle())
+    })
+//    .toolbar {
+//      ToolbarItem(placement: .navigationBarLeading) {
+//        Button(action: {
+//          presentationMode.wrappedValue.dismiss()
+//        }, label: {
+//          Image(systemName:"chevron.left.circle.fill")
+//            .font(.system(size: 50))
+//            .foregroundColor(.black)
+//            .background(Color.yellow)
+//        })
+//      }
+//    }
     .edgesIgnoringSafeArea(.top)
+  }
+
+  var recipeImage: some View {
+    Image("pasta")
+      .resizable()
+      .scaledToFill()
+      .frame(minWidth: 0, maxWidth: .infinity)
+      .frame(height: 350)
+      .clipped()
+  }
+
+  var detailsCard: some View {
+    VStack(spacing: 10) {
+      Text("Pasta").font(.system(.title3, design: .rounded)).bold()
+      HStack(spacing: 2) {
+        Image(systemName: "star.fill").foregroundColor(.yellow)
+        Image(systemName: "star.fill").foregroundColor(.yellow)
+        Image(systemName: "star.fill").foregroundColor(.yellow)
+        Image(systemName: "star.fill").foregroundColor(.yellow)
+        Image(systemName: "star.fill").foregroundColor(.yellow)
+      }
+      HStack {
+        ImageTag(image: "clock", tag1: "35", tag2: "mins")
+        ImageTag(image: "person.2.fill", tag1: "3", tag2: "servings")
+        ImageTag(image: "flame", tag1: "350", tag2: "Cal")
+        ImageTag(image: "square.stack.3d.up.fill", tag1: "", tag2: "Easy")
+      }
+    }
+    .padding()
+    .background(Color.white.opacity(0.95))
+    .cornerRadius(15)
+    .shadow(radius: 2)
+    .offset(y: -70)
+    .padding(.bottom, -70)
+  }
+
+  var ingredients: some View {
+    VStack(alignment: .leading) {
+      Text("Ingredients")
+        .font(.system(.title3, design: .rounded))
+        .bold()
+
+      ScrollView(.horizontal) {
+        HStack(spacing: 10) {
+          IngredientCard(name: "White Bread", image: "white-bread", amount: "2 slices")
+          IngredientCard(name: "Whole Chicken", image: "whole-chicken", amount: "1 pound")
+          IngredientCard(name: "Pineapple", image: "pineapple", amount: "2 pounds")
+        }
+        .frame(height: 162)
+      }
+    }
+    .padding()
   }
 }
 
@@ -112,6 +148,8 @@ struct ImageTag: View {
 
 struct RecipeDetail_Previews: PreviewProvider {
   static var previews: some View {
-    RecipeDetail()
+    NavigationView {
+      RecipeDetail()
+    }
   }
 }

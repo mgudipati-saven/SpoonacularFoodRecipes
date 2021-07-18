@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  RecipeListView.swift
 //  FoodRecipes
 //
 //  Created by Murty Gudipati on 02/07/21.
@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
+struct RecipeListView: View {
   @State var recipeSearch = ComplexSearch(query: "pasta")
   @State private var showFilter = false
 
@@ -22,6 +22,22 @@ struct ContentView: View {
           FilterRecipes(recipeSearch: $recipeSearch)
         }
         .navigationTitle("Recipes")
+        .navigationBarTitleDisplayMode(.automatic)
+    }
+//    .accentColor(.yellow)
+  }
+
+  var horizontalScroll: some View {
+    ScrollView(.horizontal, showsIndicators: false) {
+      HStack {
+        Group {
+          CardView()
+          CardView()
+          CardView()
+          CardView()
+        }
+        .frame(width: 200, height: 300)
+      }
     }
   }
 
@@ -40,7 +56,9 @@ struct RecipeList: View {
   var body: some View {
     List {
       ForEach(recipeFetcher.results) { recipe in
-        RecipeRow(recipe: recipe)
+        NavigationLink(destination: RecipeDetail()) {
+          RecipeRow(recipe: recipe)
+        }
       }
     }
     .listStyle(PlainListStyle())
@@ -49,6 +67,6 @@ struct RecipeList: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    RecipeListView()
   }
 }
