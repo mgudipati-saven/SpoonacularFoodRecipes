@@ -24,7 +24,6 @@ struct RecipeListView: View {
         .navigationTitle("Recipes")
         .navigationBarTitleDisplayMode(.automatic)
     }
-//    .accentColor(.yellow)
   }
 
   var horizontalScroll: some View {
@@ -56,7 +55,12 @@ struct RecipeList: View {
   var body: some View {
     List {
       ForEach(recipeFetcher.results) { recipe in
-        NavigationLink(destination: RecipeDetail()) {
+        ZStack(alignment: .leading) {
+          NavigationLink(destination: RecipeDetail(recipe: recipe)) {
+            EmptyView()
+          }
+          .opacity(0)
+          
           RecipeRow(recipe: recipe)
         }
       }

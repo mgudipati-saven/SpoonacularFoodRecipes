@@ -10,38 +10,39 @@ import SwiftUI
 struct RecipeDetail: View {
   @Environment(\.presentationMode) var presentationMode
 
+  var recipe: Recipe
+
   var body: some View {
     ScrollView {
       VStack {
         recipeImage
         detailsCard
-        ingredients
+        ingredientsList
       }
     }
     .navigationBarBackButtonHidden(true)
     .navigationBarItems(leading: Button(action : {
-                self.presentationMode.wrappedValue.dismiss()
-            }){
-//    Text("\(Image(systemName: "chevron.left.circle.fill"))")
+      self.presentationMode.wrappedValue.dismiss()
+    }){
       Image(systemName:"chevron.left")
-        .font(.system(size: 35))
-      .foregroundColor(.white)
+        .font(.system(size: 25))
+        .foregroundColor(.white)
         .padding(10)
-      .background(Color.yellow)
-      .clipShape(Circle())
+        .background(Color.yellow)
+        .clipShape(Circle())
     })
-//    .toolbar {
-//      ToolbarItem(placement: .navigationBarLeading) {
-//        Button(action: {
-//          presentationMode.wrappedValue.dismiss()
-//        }, label: {
-//          Image(systemName:"chevron.left.circle.fill")
-//            .font(.system(size: 50))
-//            .foregroundColor(.black)
-//            .background(Color.yellow)
-//        })
-//      }
-//    }
+    //    .toolbar {
+    //      ToolbarItem(placement: .navigationBarLeading) {
+    //        Button(action: {
+    //          presentationMode.wrappedValue.dismiss()
+    //        }, label: {
+    //          Image(systemName:"chevron.left.circle.fill")
+    //            .font(.system(size: 50))
+    //            .foregroundColor(.black)
+    //            .background(Color.yellow)
+    //        })
+    //      }
+    //    }
     .edgesIgnoringSafeArea(.top)
   }
 
@@ -79,7 +80,7 @@ struct RecipeDetail: View {
     .padding(.bottom, -70)
   }
 
-  var ingredients: some View {
+  var ingredientsList: some View {
     VStack(alignment: .leading) {
       Text("Ingredients")
         .font(.system(.title3, design: .rounded))
@@ -149,7 +150,7 @@ struct ImageTag: View {
 struct RecipeDetail_Previews: PreviewProvider {
   static var previews: some View {
     NavigationView {
-      RecipeDetail()
+      RecipeDetail(recipe: Recipe.samples[0])
     }
   }
 }
