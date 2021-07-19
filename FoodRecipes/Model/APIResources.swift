@@ -38,7 +38,7 @@ struct ComplexSearch {
   var parameters: [String:String] {
     var params = [String:String]()
     params["query"] = query
-    params["addRecipeNutrition"] = "true"
+//    params["addRecipeNutrition"] = "true"
     params["cuisine"] = cuisine?.rawValue
     params["diet"] = diet?.rawValue
     

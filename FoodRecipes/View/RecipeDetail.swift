@@ -64,14 +64,14 @@ struct RecipeDetail: View {
         .bold()
 
       HStack(spacing: 2) {
-        ForEach(0..<recipe.aggregateLikes) { _ in
+        ForEach(0..<2) { _ in
           Image(systemName: "star.fill").foregroundColor(.yellow)
         }
       }
 
       HStack {
-        ImageTag(image: "clock", tag1: "\(recipe.readyInMinutes)", tag2: "mins")
-        ImageTag(image: "person.2.fill", tag1: "\(recipe.servings)", tag2: "servings")
+        ImageTag(image: "clock", tag1: "\(recipe.readyInMinutes ?? 0)", tag2: "mins")
+        ImageTag(image: "person.2.fill", tag1: "\(recipe.servings ?? 0)", tag2: "servings")
         ImageTag(image: "flame", tag1: "350", tag2: "Cal")
         ImageTag(image: "square.stack.3d.up.fill", tag1: "", tag2: "Easy")
       }

@@ -41,7 +41,7 @@ struct RecipeCard: View {
         Image(systemName: "heart.fill")
           .foregroundColor(.red)
 
-        Text("\(recipe.aggregateLikes)")
+        Text("\(recipe.aggregateLikes ?? 0)")
           .font(.footnote)
           .bold()
           .foregroundColor(.white)
@@ -57,7 +57,7 @@ struct RecipeCard: View {
         Image(systemName: "clock")
           .foregroundColor(.white)
 
-        Text("\(recipe.readyInMinutes)m")
+        Text("\(recipe.readyInMinutes ?? 0)m")
           .font(.footnote)
           .bold()
           .foregroundColor(.white)

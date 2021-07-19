@@ -8,14 +8,14 @@
 import Foundation
 import SwiftUI
 
-struct Recipe: Codable, Identifiable {
+struct Recipe: Codable, Identifiable, Hashable {
   let id: Int
   let title: String
   let url: String
-  let summary: String
-  let aggregateLikes: Int
-  let readyInMinutes: Int
-  let servings: Int
+  var summary: String?
+  var aggregateLikes: Int?
+  var readyInMinutes: Int?
+  var servings: Int?
   var image: UIImage? = nil
 
   enum CodingKeys: String, CodingKey {
