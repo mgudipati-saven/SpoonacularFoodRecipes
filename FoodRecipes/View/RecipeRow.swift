@@ -15,15 +15,15 @@ struct RecipeRow: View {
       thumbnail
 
       VStack(alignment: .leading) {
-        Text(recipe.title)
+        Text(recipe.title ?? "")
           .lineLimit(2)
           .font(.system(.title2, design: .rounded))
 
-        Text(recipe.title)
+        Text(recipe.title ?? "")
           .lineLimit(1)
           .font(.system(.body, design: .rounded))
 
-        Text(recipe.title)
+        Text(recipe.title ?? "")
           .lineLimit(1)
           .font(.system(.subheadline, design: .rounded))
           .foregroundColor(.gray)

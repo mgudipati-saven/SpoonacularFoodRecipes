@@ -54,14 +54,11 @@ struct RecipeList: View {
 
   var body: some View {
     List {
-      ForEach(recipeFetcher.results) { recipe in
+      ForEach(recipeFetcher.previews) { recipe in
         ZStack(alignment: .leading) {
-          NavigationLink(
-            destination: RecipeDetail(recipe: recipe),
-            tag: recipe,
-            selection: $recipeFetcher.selectedRecipe,
-            label: { EmptyView() }
-          )
+          NavigationLink(destination: RecipeDetailView(id: recipe.id)) {
+            EmptyView()
+          }
           .opacity(0)
           
           RecipeRow(recipe: recipe)

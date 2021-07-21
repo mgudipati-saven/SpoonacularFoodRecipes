@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct RecipeDetail: View {
+struct RecipeDetailView: View {
   @Environment(\.presentationMode) var presentationMode
-
-  var recipe: Recipe
+  @StateObject var fetcher = RecipeFetcher()
+  
+  var id: Int
 
   var body: some View {
     ScrollView {
@@ -20,6 +21,7 @@ struct RecipeDetail: View {
         ingredientsList
       }
     }
+    .onAppear { fetcher.fetch(for: id) }
     .navigationBarBackButtonHidden(true)
     .navigationBarItems(leading: Button(action : {
       self.presentationMode.wrappedValue.dismiss()
@@ -48,18 +50,24 @@ struct RecipeDetail: View {
     .edgesIgnoringSafeArea(.all)
   }
 
+  @ViewBuilder
   var recipeImage: some View {
-    Image(uiImage: recipe.image!)
-      .resizable()
-      .scaledToFill()
-      .frame(minWidth: 0, maxWidth: .infinity)
-      .frame(height: 350)
-      .clipped()
+    if fetcher.recipe?.image != nil {
+      Image(uiImage: (fetcher.recipe?.image!)!)
+        .resizable()
+        .scaledToFill()
+        .frame(minWidth: 0, maxWidth: .infinity)
+        .frame(height: 350)
+        .clipped()
+    } else {
+      ProgressView()
+        .frame(height: 350)
+    }
   }
 
   var detailsCard: some View {
     VStack(spacing: 10) {
-      Text("\(recipe.title)")
+      Text("\(fetcher.recipe?.title ?? "")")
         .font(.system(.title3, design: .rounded))
         .bold()
 
@@ -70,8 +78,8 @@ struct RecipeDetail: View {
       }
 
       HStack {
-        ImageTag(image: "clock", tag1: "\(recipe.readyInMinutes ?? 0)", tag2: "mins")
-        ImageTag(image: "person.2.fill", tag1: "\(recipe.servings ?? 0)", tag2: "servings")
+        ImageTag(image: "clock", tag1: "\(fetcher.recipe?.readyInMinutes ?? 0)", tag2: "mins")
+        ImageTag(image: "person.2.fill", tag1: "\(fetcher.recipe?.servings ?? 0)", tag2: "servings")
         ImageTag(image: "flame", tag1: "350", tag2: "Cal")
         ImageTag(image: "square.stack.3d.up.fill", tag1: "", tag2: "Easy")
       }
@@ -151,10 +159,10 @@ struct ImageTag: View {
 }
 
 
-struct RecipeDetail_Previews: PreviewProvider {
-  static var previews: some View {
-    NavigationView {
-      RecipeDetail(recipe: Recipe.samples[0])
-    }
-  }
-}
+//struct RecipeDetail_Previews: PreviewProvider {
+//  static var previews: some View {
+//    NavigationView {
+//      RecipeDetailView(id: <#T##Int#>)
+//    }
+//  }
+//}

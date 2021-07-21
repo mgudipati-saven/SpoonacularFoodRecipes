@@ -23,7 +23,7 @@ struct RecipeCard: View {
             .opacity(0.6)
         )
 
-      Text(recipe.title)
+      Text(recipe.title ?? "")
         .font(.system(.title, design: .rounded))
         .fontWeight(.black)
         .foregroundColor(.white)

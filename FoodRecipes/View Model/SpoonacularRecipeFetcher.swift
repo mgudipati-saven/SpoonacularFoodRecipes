@@ -9,15 +9,11 @@ import SwiftUI
 import Combine
 
 class SpoonacularRecipeFetcher: ObservableObject {
-  @Published var results = [Recipe]()
+  @Published var previews = [Recipe]()
   @Published var selectedRecipe: Recipe?
 
-  var recipeSearch: ComplexSearch {
-    didSet { fetch() }
-  }
-
+  var recipeSearch: ComplexSearch { didSet { fetch() } }
   var cancellables = Set<AnyCancellable>()
-
   var fetchRecipeImage = PassthroughSubject<Recipe, Never>()
 
   init(recipeSearch: ComplexSearch) {
@@ -43,11 +39,11 @@ class SpoonacularRecipeFetcher: ObservableObject {
       .receive(on: DispatchQueue.main)
       .sink { [unowned self] recipe in
         print(recipe)
-        if let index = self.results.firstIndex(where: { $0.id == recipe.id} ) {
-          self.results[index].aggregateLikes = recipe.aggregateLikes
-          self.results[index].readyInMinutes = recipe.readyInMinutes
-          self.results[index].servings = recipe.servings
-          self.results[index].summary = recipe.summary
+        if let index = self.previews.firstIndex(where: { $0.id == recipe.id} ) {
+          self.previews[index].aggregateLikes = recipe.aggregateLikes
+          self.previews[index].readyInMinutes = recipe.readyInMinutes
+          self.previews[index].servings = recipe.servings
+          self.previews[index].summary = recipe.summary
         }
       }
       .store(in: &cancellables)
@@ -67,8 +63,8 @@ class SpoonacularRecipeFetcher: ObservableObject {
         .sink {
           print("Completion \($0)")
         } receiveValue: { response in
-          self.results = response.results
-          for recipe in self.results {
+          self.previews = response.results
+          for recipe in self.previews {
             self.fetchRecipeImage.send(recipe)
           }
         }
@@ -76,7 +72,7 @@ class SpoonacularRecipeFetcher: ObservableObject {
 
       fetchRecipeImage
         .flatMap { recipe -> AnyPublisher<Recipe, Never> in
-          if let url = URL(string: recipe.url) {
+          if let url = URL(string: recipe.url!) {
             return URLSession.shared.dataTaskPublisher(for: url)
               .compactMap { (data, response) in
                 UIImage(data: data)
@@ -95,8 +91,8 @@ class SpoonacularRecipeFetcher: ObservableObject {
         }
         .receive(on: DispatchQueue.main)
         .sink { [unowned self] recipe in
-          if let index = self.results.firstIndex(where: { $0.id == recipe.id} ) {
-            self.results[index] = recipe
+          if let index = self.previews.firstIndex(where: { $0.id == recipe.id} ) {
+            self.previews[index] = recipe
           }
         }
         .store(in: &cancellables)

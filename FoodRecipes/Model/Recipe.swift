@@ -10,8 +10,8 @@ import SwiftUI
 
 struct Recipe: Codable, Identifiable, Hashable {
   let id: Int
-  let title: String
-  let url: String
+  let title: String?
+  let url: String?
   var summary: String?
   var aggregateLikes: Int?
   var readyInMinutes: Int?
