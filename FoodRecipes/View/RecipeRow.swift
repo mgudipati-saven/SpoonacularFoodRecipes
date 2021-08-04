@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecipeRow: View {
-  var recipe: Recipe
+  @ObservedObject var recipe: Recipe
 
   var body: some View {
     HStack(alignment: .top, spacing: 20) {
@@ -34,7 +34,7 @@ struct RecipeRow: View {
   var thumbnail: some View {
     ZStack {
       if recipe.image != nil {
-        Image(uiImage: recipe.image!)
+        Image(uiImage: UIImage(data: recipe.image!)!)
           .resizable()
           .aspectRatio(contentMode: .fill)
       } else {
@@ -48,15 +48,15 @@ struct RecipeRow: View {
   }
 }
 
-struct RecipeRow_Previews: PreviewProvider {
-  static var previews: some View {
-    Group {
-      RecipeRow(recipe: Recipe.samples[0])
-        .previewLayout(.sizeThatFits)
-
-      RecipeRow(recipe: Recipe.samples[0])
-        .previewLayout(.sizeThatFits)
-        .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
-    }
-  }
-}
+//struct RecipeRow_Previews: PreviewProvider {
+//  static var previews: some View {
+//    Group {
+//      RecipeRow(recipe: SpoonacularRecipe.samples[0])
+//        .previewLayout(.sizeThatFits)
+//
+//      RecipeRow(recipe: SpoonacularRecipe.samples[0])
+//        .previewLayout(.sizeThatFits)
+//        .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
+//    }
+//  }
+//}

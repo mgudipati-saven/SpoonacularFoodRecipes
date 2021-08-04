@@ -9,10 +9,10 @@ import SwiftUI
 import Combine
 
 class RecipeFetcher: ObservableObject {
-  @Published var recipe: Recipe? = nil
+  @Published var recipe: SpoonacularRecipe? = nil
 
   var cancellables = Set<AnyCancellable>()
-  var fetchRecipeImage = PassthroughSubject<Recipe, Never>()
+  var fetchRecipeImage = PassthroughSubject<SpoonacularRecipe, Never>()
 
   func fetch(for id: Int) {
     cancellables.forEach { cancellable in
@@ -23,7 +23,7 @@ class RecipeFetcher: ObservableObject {
       print(url)
       URLSession.shared.dataTaskPublisher(for: url)
         .map(\.data)
-        .decode(type: Recipe.self, decoder: JSONDecoder())
+        .decode(type: SpoonacularRecipe.self, decoder: JSONDecoder())
         .receive(on: DispatchQueue.main)
         .sink {
           print("Completion \($0)")
@@ -34,13 +34,13 @@ class RecipeFetcher: ObservableObject {
         .store(in: &cancellables)
 
       fetchRecipeImage
-        .flatMap { recipe -> AnyPublisher<Recipe, Never> in
+        .flatMap { recipe -> AnyPublisher<SpoonacularRecipe, Never> in
           if let url = URL(string: recipe.url!) {
             return URLSession.shared.dataTaskPublisher(for: url)
               .compactMap { (data, response) in
                 UIImage(data: data)
               }
-              .map { image -> Recipe in
+              .map { image -> SpoonacularRecipe in
                 var recipe = recipe
                 recipe.image = image
                 return recipe

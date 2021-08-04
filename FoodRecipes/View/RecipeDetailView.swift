@@ -9,9 +9,7 @@ import SwiftUI
 
 struct RecipeDetailView: View {
   @Environment(\.presentationMode) var presentationMode
-  @StateObject var fetcher = RecipeFetcher()
-  
-  var id: Int
+  @ObservedObject var recipe: Recipe
 
   var body: some View {
     ScrollView {
@@ -21,7 +19,7 @@ struct RecipeDetailView: View {
         ingredientsList
       }
     }
-    .onAppear { fetcher.fetch(for: id) }
+    .onAppear {  }
     .navigationBarBackButtonHidden(true)
     .navigationBarItems(leading: Button(action : {
       self.presentationMode.wrappedValue.dismiss()
@@ -52,8 +50,8 @@ struct RecipeDetailView: View {
 
   @ViewBuilder
   var recipeImage: some View {
-    if fetcher.recipe?.image != nil {
-      Image(uiImage: (fetcher.recipe?.image!)!)
+    if recipe.image != nil {
+      Image(uiImage: UIImage(data: recipe.image!)!)
         .resizable()
         .scaledToFill()
         .frame(minWidth: 0, maxWidth: .infinity)
@@ -67,7 +65,7 @@ struct RecipeDetailView: View {
 
   var detailsCard: some View {
     VStack(spacing: 10) {
-      Text("\(fetcher.recipe?.title ?? "")")
+      Text("\(recipe.title ?? "Unknown")")
         .font(.system(.title3, design: .rounded))
         .bold()
 
@@ -78,8 +76,8 @@ struct RecipeDetailView: View {
       }
 
       HStack {
-        ImageTag(image: "clock", tag1: "\(fetcher.recipe?.readyInMinutes ?? 0)", tag2: "mins")
-        ImageTag(image: "person.2.fill", tag1: "\(fetcher.recipe?.servings ?? 0)", tag2: "servings")
+        ImageTag(image: "clock", tag1: "\(recipe.readyInMinutes)", tag2: "mins")
+        ImageTag(image: "person.2.fill", tag1: "\(recipe.servings)", tag2: "servings")
         ImageTag(image: "flame", tag1: "350", tag2: "Cal")
         ImageTag(image: "square.stack.3d.up.fill", tag1: "", tag2: "Easy")
       }

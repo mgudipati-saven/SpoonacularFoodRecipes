@@ -9,12 +9,12 @@ import SwiftUI
 import Combine
 
 class SpoonacularRecipeFetcher: ObservableObject {
-  @Published var previews = [Recipe]()
-  @Published var selectedRecipe: Recipe?
+  @Published var previews = [SpoonacularRecipe]()
+  @Published var selectedRecipe: SpoonacularRecipe?
 
   var recipeSearch: ComplexSearch { didSet { fetch() } }
   var cancellables = Set<AnyCancellable>()
-  var fetchRecipeImage = PassthroughSubject<Recipe, Never>()
+  var fetchRecipeImage = PassthroughSubject<SpoonacularRecipe, Never>()
 
   init(recipeSearch: ComplexSearch) {
     self.recipeSearch = recipeSearch
@@ -23,12 +23,12 @@ class SpoonacularRecipeFetcher: ObservableObject {
     // fetch details for selected recipe
     $selectedRecipe
       .compactMap { $0 }
-      .flatMap { recipe -> AnyPublisher<Recipe, Never> in
+      .flatMap { recipe -> AnyPublisher<SpoonacularRecipe, Never> in
         if let url = URL(string: "https://api.spoonacular.com/recipes/\(recipe.id)/information?apiKey=0198c82840ed492bb38338ec5ac01519") {
           print(url)
           return URLSession.shared.dataTaskPublisher(for: url)
             .map(\.data)
-            .decode(type: Recipe.self, decoder: JSONDecoder())
+            .decode(type: SpoonacularRecipe.self, decoder: JSONDecoder())
             .replaceError(with: recipe)
             .eraseToAnyPublisher()
         } else {
@@ -54,7 +54,7 @@ class SpoonacularRecipeFetcher: ObservableObject {
       cancellable.cancel()
     }
 
-    if let url = APIResources.url(with: recipeSearch.parameters) {
+    if let url = SpoonacularAPIResources.url(with: recipeSearch.parameters) {
       print(url)
       URLSession.shared.dataTaskPublisher(for: url)
         .map(\.data)
@@ -71,13 +71,13 @@ class SpoonacularRecipeFetcher: ObservableObject {
         .store(in: &cancellables)
 
       fetchRecipeImage
-        .flatMap { recipe -> AnyPublisher<Recipe, Never> in
+        .flatMap { recipe -> AnyPublisher<SpoonacularRecipe, Never> in
           if let url = URL(string: recipe.url!) {
             return URLSession.shared.dataTaskPublisher(for: url)
               .compactMap { (data, response) in
                 UIImage(data: data)
               }
-              .map { image -> Recipe in
+              .map { image -> SpoonacularRecipe in
                 var recipe = recipe
                 recipe.image = image
                 return recipe

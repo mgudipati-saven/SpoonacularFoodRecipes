@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecipeCard: View {
-  let recipe: Recipe
+  let recipe: SpoonacularRecipe
 
   var body: some View {
     ZStack {
@@ -71,7 +71,7 @@ struct RecipeCard: View {
 
 struct RecipeCard_Previews: PreviewProvider {
     static var previews: some View {
-      RecipeCard(recipe: Recipe.samples[0])
+      RecipeCard(recipe: SpoonacularRecipe.samples[0])
         .frame(height: 200)
     }
 }

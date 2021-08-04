@@ -9,8 +9,12 @@ import SwiftUI
 import CoreData
 
 struct RecipeListView: View {
-  @State var recipeSearch = ComplexSearch(query: "pasta")
+  @Environment(\.managedObjectContext) var context
+
+  @State var recipeSearch: ComplexSearch
   @State private var showFilter = false
+
+  let webservice = WebService.shared
 
   var body: some View {
     NavigationView {
@@ -20,6 +24,7 @@ struct RecipeListView: View {
         }
         .sheet(isPresented: $showFilter) {
           FilterRecipes(recipeSearch: $recipeSearch)
+            .environment(\.managedObjectContext, context)
         }
         .navigationTitle("Recipes")
         .navigationBarTitleDisplayMode(.automatic)
@@ -46,17 +51,20 @@ struct RecipeListView: View {
 }
 
 struct RecipeList: View {
-  @ObservedObject var recipeFetcher: SpoonacularRecipeFetcher
+  @FetchRequest var recipes: FetchedResults<Recipe>
 
   init(_ recipeSearch: ComplexSearch) {
-    recipeFetcher = SpoonacularRecipeFetcher(recipeSearch: recipeSearch)
+    let request = NSFetchRequest<Recipe>(entityName: "Recipe")
+    request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+    request.predicate = NSPredicate.all
+    _recipes = FetchRequest(fetchRequest: request)
   }
 
   var body: some View {
     List {
-      ForEach(recipeFetcher.previews) { recipe in
+      ForEach(recipes) { recipe in
         ZStack(alignment: .leading) {
-          NavigationLink(destination: RecipeDetailView(id: recipe.id)) {
+          NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
             EmptyView()
           }
           .opacity(0)
@@ -69,8 +77,8 @@ struct RecipeList: View {
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    RecipeListView()
-  }
-}
+//struct ContentView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    RecipeListView()
+//  }
+//}
