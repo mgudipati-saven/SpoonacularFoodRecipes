@@ -9,10 +9,13 @@ import SwiftUI
 
 struct FilterRecipes: View {
   @Environment(\.presentationMode) var presentationMode
+  @Environment(\.managedObjectContext) var context
 
   @Binding var recipeSearch: ComplexSearch
 
   @State private var draft: ComplexSearch
+
+  let webservice = WebService.shared
 
   init(recipeSearch: Binding<ComplexSearch>) {
     _recipeSearch = recipeSearch
@@ -60,6 +63,7 @@ struct FilterRecipes: View {
 
   var done: some View {
     Button("Done") {
+      webservice.fetch(recipeSearch: draft, context: context)
       recipeSearch = draft
       presentationMode.wrappedValue.dismiss()
     }

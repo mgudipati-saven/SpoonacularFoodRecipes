@@ -1,5 +1,5 @@
 //
-//  APIResources.swift
+//  SpoonacularAPIResources.swift
 //  FoodRecipes
 //
 //  Created by Murty Gudipati on 02/07/21.
@@ -7,10 +7,12 @@
 
 import Foundation
 
-struct APIResources {
+struct SpoonacularAPIResources {
   enum EndPoint: String {
     case recipes
   }
+
+  static var 
 
   static func url(with parameters: [String:String]) -> URL? {
     var components = URLComponents()
@@ -27,7 +29,7 @@ struct APIResources {
 }
 
 struct ComplexSearchResponse: Codable {
-  let results: [Recipe]
+  let results: [SpoonacularRecipe]
 }
 
 struct ComplexSearch {

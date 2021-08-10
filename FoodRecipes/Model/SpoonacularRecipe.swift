@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Recipe: Codable, Identifiable, Hashable {
+struct SpoonacularRecipe: Codable, Identifiable, Hashable {
   let id: Int
   let title: String?
   let url: String?
@@ -24,7 +24,7 @@ struct Recipe: Codable, Identifiable, Hashable {
   }
 
   static let samples = [
-    Recipe(
+    SpoonacularRecipe(
       id: 654959,
       title: "Pasta With Tuna",
       url: "https://spoonacular.com/recipeImages/654959-312x231.jpg",

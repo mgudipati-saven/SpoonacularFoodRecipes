@@ -9,12 +9,18 @@ import SwiftUI
 
 @main
 struct FoodRecipesApp: App {
-    let persistenceController = PersistenceController.shared
+  let persistenceController = PersistenceController.shared
+  let webservice = WebService.shared
+  let recipeSearch = ComplexSearch(query: "pasta")
 
-    var body: some Scene {
-        WindowGroup {
-          RecipeListView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-        }
+  init() {
+    webservice.fetch(recipeSearch: recipeSearch, context: persistenceController.container.viewContext)
+  }
+
+  var body: some Scene {
+    WindowGroup {
+      RecipeListView(recipeSearch: recipeSearch)
+        .environment(\.managedObjectContext, persistenceController.container.viewContext)
     }
+  }
 }
